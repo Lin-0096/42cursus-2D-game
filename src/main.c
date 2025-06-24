@@ -6,7 +6,7 @@
 /*   By: linliu <linliu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 10:46:49 by linliu            #+#    #+#             */
-/*   Updated: 2025/06/24 14:21:57 by linliu           ###   ########.fr       */
+/*   Updated: 2025/06/24 17:18:53 by linliu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,6 @@ int	main(int argc, char **argv)
 		ft_putstr_fd("One map at a time!\n", STDERR_FILENO);
 		exit(EXIT_FAILURE);
 	}
+	(void)argv;
 
 }
