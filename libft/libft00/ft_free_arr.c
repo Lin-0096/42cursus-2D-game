@@ -6,7 +6,7 @@
 /*   By: linliu <linliu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 10:58:46 by linliu            #+#    #+#             */
-/*   Updated: 2025/06/13 11:24:07 by linliu           ###   ########.fr       */
+/*   Updated: 2025/06/25 12:32:04 by linliu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_free_arr(char **arr)
 	i = 0;
 	if (!arr)
 		return ;
-	while (arr[i])
+	while (arr && arr[i])
 	{
 		free(arr[i]);
 		i++;

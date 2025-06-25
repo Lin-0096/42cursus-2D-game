@@ -17,4 +17,3 @@ typedef struct mlx_key_data
 }	mlx_key_data_t;
 
 make MLX_FLAGS="-LMLX42/build -lmlx42 -L/opt/homebrew/opt/glfw/lib -ldl -lglfw -pthread -lm"
-

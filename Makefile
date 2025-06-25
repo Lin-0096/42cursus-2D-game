@@ -4,7 +4,8 @@ CFLAG := -Wall -Wextra -Werror
 
 INCLUDES := -I includes -I libft -I MLX42/include
 
-SRCS := src/main.c
+SRCS := src/main.c \
+		src/utils.c
 OBJS := $(SRCS:.c=.o)
 
 LIBFT_DIR := libft
