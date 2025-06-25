@@ -19,7 +19,7 @@ MLX_FLAGS := -L$(MLX_DIR)/build -lmlx42 -ldl -lglfw -pthread -lm
 
 all: $(LIBFT_LIB) $(MLX_LIB) $(NAME)
 
-$(NAME): $(LIBFT_LIB) $(OBJS)
+$(NAME): $(LIBFT_LIB) $(MLX_LIB) $(OBJS)
 		@$(CC) $(CFLAG) $(OBJS) $(LIBFT_LIB) $(MLX_FLAGS) -o $(NAME)
 
 $(LIBFT_LIB):
@@ -31,6 +31,7 @@ $(MLX_LIB):
 		fi;
 		@cmake -B $(MLX_DIR)/build -S $(MLX_DIR)
 		@cmake --build $(MLX_DIR)/build --parallel 4
+
 #MLX42 is a graphics library that uses CMake as its build system generator(like libft uses make)
 #-B build, build dir (put all generated files in MLX_42/build); -S source
 #means using the CMakeLists.txt in MLX_42, and put all generated files in MLX_42/build

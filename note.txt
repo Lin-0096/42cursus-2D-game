@@ -8,3 +8,13 @@ typedef struct mlx
 }	mlx_t;
 
 
+typedef struct mlx_key_data
+{
+	keys_t			key;
+	action_t		action;
+	int32_t			os_key;
+	modifier_key_t	modifier;
+}	mlx_key_data_t;
+
+make MLX_FLAGS="-LMLX42/build -lmlx42 -L/opt/homebrew/opt/glfw/lib -ldl -lglfw -pthread -lm"
+

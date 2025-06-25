@@ -6,7 +6,7 @@
 /*   By: linliu <linliu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 10:49:45 by linliu            #+#    #+#             */
-/*   Updated: 2025/06/24 19:26:28 by linliu           ###   ########.fr       */
+/*   Updated: 2025/06/25 07:36:52 by linliu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define SO_LONG_H
 
 # define WIDTH 800
-# define HEIGHT 600
+# define HEIGHT 600 //common window size
 
 # include "../MLX42/include/MLX42/MLX42.h"
 # include "../libft/libft.h"
