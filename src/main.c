@@ -6,7 +6,7 @@
 /*   By: linliu <linliu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 10:46:49 by linliu            #+#    #+#             */
-/*   Updated: 2025/06/25 13:56:03 by linliu           ###   ########.fr       */
+/*   Updated: 2025/06/25 21:19:23 by linliu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,16 @@
 
 int	main (int argc, char **argv)
 {
-	if(argc < 2)
+	t_map	*game_map;
+
+	if(argc != 2)
 	{
-		ft_putstr_fd("No map!\n", STDERR_FILENO);
-		exit(EXIT_FAILURE);
+		ft_putstr_fd("Error: give me one map\n", STDERR_FILENO);
+		return(EXIT_FAILURE);
 	}
-	if(argc > 2)
-	{
-		ft_putstr_fd("One map at a time!\n", STDERR_FILENO);
-		exit(EXIT_FAILURE);
-	}
-	char **map = read_map(argv[1]);
-	print_map(map);
+	game_map = read_map(argv[1]);
+	print_map(game_map->grid);
+	free_whole_map(game_map);
 	return (0);
 }
 
@@ -55,27 +53,6 @@ int	main (int argc, char **argv)
 // 	mlx_loop(mlx);
 // 	//stop
 // 	mlx_terminate(mlx);
-
-// 	int fd = open(argv[1], O_RDONLY);
-// 	int i = 0;
-// 	char *new_line = get_next_line(fd);
-// 	while (new_line)
-// 	{
-// 		i++;
-// 		free(new_line);
-// 		new_line = get_next_line(fd);
-// 	}
-// 	close(fd);
-// 	fd = open(argv[1], O_RDONLY);
-// 	int line = i;
-// 	char **map = malloc(sizeof(char *) * (line + 1));
-// 	if (!map)
-// 		return (NULL);
-// 	i = 0;
-// 	while (i < line)
-// 		map[i++] = get_next_line(fd);
-// 	map[line] = NULL; //!!
-// 	close(fd);
 // }
 
 
