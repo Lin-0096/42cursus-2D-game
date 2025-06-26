@@ -7,7 +7,8 @@ INCLUDES := -I includes -I libft -I MLX42/include
 SRCS := src/main.c \
 		src/parse_map.c \
 		src/validate_map.c \
-		src/common_utils.c
+		src/map_utils.c \
+		src/check_path.c
 OBJS := $(SRCS:.c=.o)
 
 LIBFT_DIR := libft

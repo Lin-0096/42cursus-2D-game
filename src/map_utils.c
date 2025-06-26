@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   common_utils.c                                     :+:      :+:    :+:   */
+/*   map_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: linliu <linliu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 13:33:03 by linliu            #+#    #+#             */
-/*   Updated: 2025/06/26 15:55:22 by linliu           ###   ########.fr       */
+/*   Updated: 2025/06/26 15:01:10 by linliu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	print_map(t_map *map) //for debug,delete!!
+void	print_map(char **map) //for debug,delete!!
 {
 	int	i;
 
 	i = 0;
-	while(map->grid[i])
+	while(map[i])
 	{
-		ft_putstr_fd(map->grid[i], 1);
+		ft_putstr_fd(map[i], 1);
 		write(1, "\n", 1);
 		i++;
 	}
-	printf("height:%i, width:%i\n", map->height, map->width);
+	//printf("height:%i, width:%i\n", map->height, map->width);
 }
 
 void	init_map(t_map *map)

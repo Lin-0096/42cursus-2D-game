@@ -6,7 +6,7 @@
 /*   By: linliu <linliu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 12:45:11 by linliu            #+#    #+#             */
-/*   Updated: 2025/06/26 16:10:21 by linliu           ###   ########.fr       */
+/*   Updated: 2025/06/26 19:50:01 by linliu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,5 +109,6 @@ t_map *read_map(const char *filename)
 		|| map->width * TILE_SIZE > MAX_WINDOW_WIDTH)
 		free_error_handle(map, "Invalid or empty map\n");
 	validate_map(map);
+	check_path_valid(map);
 	return (map);
 }
