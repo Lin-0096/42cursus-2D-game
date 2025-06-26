@@ -6,7 +6,7 @@
 /*   By: linliu <linliu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 12:45:11 by linliu            #+#    #+#             */
-/*   Updated: 2025/06/26 11:04:20 by linliu           ###   ########.fr       */
+/*   Updated: 2025/06/26 16:10:21 by linliu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ static int	count_map_lines(t_map *map, const char *filename)
 		free(new_line);
 	}
 	close(fd);
-	if (map->height == 0 || map->height < 3)
+	if (map->height == 0 || map->height < 3
+		|| map->height * TILE_SIZE > MAX_WINDOW_HEIGHT)
 		return (0);
 	return (1);
 }
@@ -54,11 +55,13 @@ static int	fill_map(t_map *map, int fd)
 	{
 		get_line = get_next_line(fd);
 		if (!get_line)
-		{
-			ft_free_arr(map->grid);
 			return (0);
-		}
-		map->grid[i++] = remove_newline(get_line);
+		map->grid[i] = ft_strdup(get_line);
+		free(get_line);
+		if (!map->grid[i])
+			return (0);
+		remove_newline(map->grid[i]);
+		i++;
 	}
 	map->grid[i] = NULL;
 	return (1);
@@ -87,29 +90,6 @@ static int alloc_fill_map(t_map *map, const char *filename)
 	return (1);
 }
 
-// t_map *read_map(const char *filename)
-// {
-// 	int		line;
-// 	t_map	*map;
-
-// 	map = malloc(sizeof(t_map));
-// 	if (!map)
-// 		free_error_handle(map, "Malloc failed\n");
-// 	init_map(map);
-// 	if (!check_filename(filename))
-// 		free_error_handle(map, "Map file must have .ber extension\n");
-// 	line = count_map_lines(filename);
-// 	if (line == 0)
-// 		free_error_handle(map, "Invalid or empty map\n");
-// 	map->grid = alloc_fill_map(filename, line);
-// 	if (!map->grid)
-// 		free_error_handle(map, "Failed to load map\n");
-// 	map->height = line;
-// 	map->width = ft_strlen(map->grid[0]);
-// 	validate_map(map);
-// 	return (map);
-// }
-
 t_map *read_map(const char *filename)
 {
 	t_map	*map;
@@ -125,7 +105,8 @@ t_map *read_map(const char *filename)
 	if (!alloc_fill_map(map, filename))
 		free_error_handle(map, "Failed to load map\n");
 	map->width = (int)ft_strlen(map->grid[0]);
-	if (map->width == 0 || map->width < 3)
+	if (map->width == 0 || map->width < 3
+		|| map->width * TILE_SIZE > MAX_WINDOW_WIDTH)
 		free_error_handle(map, "Invalid or empty map\n");
 	validate_map(map);
 	return (map);

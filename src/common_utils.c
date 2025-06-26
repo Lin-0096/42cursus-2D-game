@@ -6,7 +6,7 @@
 /*   By: linliu <linliu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 13:33:03 by linliu            #+#    #+#             */
-/*   Updated: 2025/06/26 11:20:08 by linliu           ###   ########.fr       */
+/*   Updated: 2025/06/26 15:55:22 by linliu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,16 +52,15 @@ void	free_error_handle(t_map *map, char *str)
 	exit(EXIT_FAILURE);
 }
 
-char	*remove_newline(char *line)
+void	remove_newline(char *line)
 {
-	size_t	i;
+	int		i;
 
 	if (!line) //check NULL
-		return (NULL);
-	i = ft_strlen(line);
+		return ;
+	i = (int)ft_strlen(line);
 	if (i > 0 && line[i - 1] == '\n') // if line is an empty line(seg fault)
 	{
 		line[i - 1] = '\0';
 	}
-	return (line);
 }
