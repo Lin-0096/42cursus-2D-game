@@ -6,7 +6,7 @@
 /*   By: linliu <linliu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 10:46:49 by linliu            #+#    #+#             */
-/*   Updated: 2025/06/25 21:19:23 by linliu           ###   ########.fr       */
+/*   Updated: 2025/06/26 11:05:14 by linliu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ int	main (int argc, char **argv)
 		return(EXIT_FAILURE);
 	}
 	game_map = read_map(argv[1]);
-	print_map(game_map->grid);
+	print_map(game_map);
+
 	free_whole_map(game_map);
 	return (0);
 }

@@ -6,31 +6,26 @@
 /*   By: linliu <linliu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 12:45:11 by linliu            #+#    #+#             */
-/*   Updated: 2025/06/25 22:00:04 by linliu           ###   ########.fr       */
+/*   Updated: 2025/06/26 11:04:20 by linliu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-char	*remove_newline(char *line)
+static int	check_filename(const char *filename)
 {
-	size_t	i;
+	int	len;
 
-	if (!line) //check NULL
-		return (NULL);
-	i = ft_strlen(line);
-	if (i > 0 && line[i - 1] == '\n') // if line is an empty line(seg fault)
-	{
-		line[i - 1] = '\0';
-	}
-	return (line);
+	len = ft_strlen(filename);
+	if (len < 4 || ft_strncmp(&filename[len - 4], ".ber", 4) != 0)
+		return (0);
+	return (1);
 }
 
-static int	count_map_lines(const char *filename)
+static int	count_map_lines(t_map *map, const char *filename)
 {
 	int		fd;
 	char	*new_line;
-	int		line;
 
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
@@ -38,46 +33,44 @@ static int	count_map_lines(const char *filename)
 		perror(filename);
 		exit(EXIT_FAILURE);
 	}
-	line = 0;
 	while ((new_line = get_next_line(fd)))
 	{
-		line++;
+		map->height++;
 		free(new_line);
 	}
 	close(fd);
-	if (line == 0)
+	if (map->height == 0 || map->height < 3)
 		return (0);
-	return (line);
+	return (1);
 }
 
-static int	fill_map(char **map, int fd, int line)
+static int	fill_map(t_map *map, int fd)
 {
 	int		i;
 	char	*get_line;
 
 	i = 0;
-	while (i < line)
+	while (i < map->height)
 	{
 		get_line = get_next_line(fd);
 		if (!get_line)
 		{
-			ft_free_arr(map);
+			ft_free_arr(map->grid);
 			return (0);
 		}
-		map[i++] = remove_newline(get_line);
+		map->grid[i++] = remove_newline(get_line);
 	}
-	map[i] = NULL;
+	map->grid[i] = NULL;
 	return (1);
 }
 
-static char	**alloc_fill_map(const char *filename, int line)
+static int alloc_fill_map(t_map *map, const char *filename)
 {
-	char	**map;
 	int		fd;
 
-	map = malloc(sizeof(char *) * (line + 1));
-	if (!map)
-		return (NULL);
+	map->grid = malloc(sizeof(char *) * (map->height + 1));
+	if (!map->grid)
+		return (0);
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 	{
@@ -85,34 +78,55 @@ static char	**alloc_fill_map(const char *filename, int line)
 		perror(filename);
 		exit(EXIT_FAILURE);
 	}
-	if(!fill_map(map, fd, line))
+	if(!fill_map(map, fd))
 	{
 		close(fd);
-		return (NULL);
+		return (0);
 	}
 	close(fd);
-	return (map);
+	return (1);
 }
+
+// t_map *read_map(const char *filename)
+// {
+// 	int		line;
+// 	t_map	*map;
+
+// 	map = malloc(sizeof(t_map));
+// 	if (!map)
+// 		free_error_handle(map, "Malloc failed\n");
+// 	init_map(map);
+// 	if (!check_filename(filename))
+// 		free_error_handle(map, "Map file must have .ber extension\n");
+// 	line = count_map_lines(filename);
+// 	if (line == 0)
+// 		free_error_handle(map, "Invalid or empty map\n");
+// 	map->grid = alloc_fill_map(filename, line);
+// 	if (!map->grid)
+// 		free_error_handle(map, "Failed to load map\n");
+// 	map->height = line;
+// 	map->width = ft_strlen(map->grid[0]);
+// 	validate_map(map);
+// 	return (map);
+// }
 
 t_map *read_map(const char *filename)
 {
-	int		line;
 	t_map	*map;
 
 	map = malloc(sizeof(t_map));
 	if (!map)
 		free_error_handle(map, "Malloc failed\n");
 	init_map(map);
-	line = count_map_lines(filename);
-	if (line == 0)
+	if (!check_filename(filename))
+		free_error_handle(map, "Map file must have .ber extension\n");
+	if (!count_map_lines(map, filename))
 		free_error_handle(map, "Invalid or empty map\n");
-	map->grid = alloc_fill_map(filename, line);
-	if (!map->grid)
+	if (!alloc_fill_map(map, filename))
 		free_error_handle(map, "Failed to load map\n");
-	map->height = line;
-	map->width = ft_strlen(map->grid[0]);
-	if (map->height < 3 || map->width < 3)
-		free_error_handle(map, "Map is too small\n");
+	map->width = (int)ft_strlen(map->grid[0]);
+	if (map->width == 0 || map->width < 3)
+		free_error_handle(map, "Invalid or empty map\n");
 	validate_map(map);
 	return (map);
 }
