@@ -6,7 +6,7 @@
 /*   By: linliu <linliu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 10:49:45 by linliu            #+#    #+#             */
-/*   Updated: 2025/06/26 19:49:41 by linliu           ###   ########.fr       */
+/*   Updated: 2025/06/27 13:23:11 by linliu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 //# define WIDTH 800
 //# define HEIGHT 600 //common window size
 # define TILE_SIZE 32
+# define MAX_TILE_NUMBER 10000
 # define MAX_WINDOW_WIDTH 1920
 # define MAX_WINDOW_HEIGHT 1080
 
@@ -41,7 +42,7 @@ void	remove_newline(char *line);
 void	validate_map(t_map *map);
 
 //common utils
-void	print_map(char **map); //debug
+void	print_map(char **map); //debug,delete!!
 void	init_map(t_map *map);
 void	free_whole_map(t_map *map);
 void	free_error_handle(t_map *map, char *str);

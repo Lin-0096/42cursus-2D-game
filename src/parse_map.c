@@ -6,7 +6,7 @@
 /*   By: linliu <linliu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 12:45:11 by linliu            #+#    #+#             */
-/*   Updated: 2025/06/26 19:50:01 by linliu           ###   ########.fr       */
+/*   Updated: 2025/06/27 12:24:37 by linliu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,7 @@ static int	count_map_lines(t_map *map, const char *filename)
 		free(new_line);
 	}
 	close(fd);
-	if (map->height == 0 || map->height < 3
-		|| map->height * TILE_SIZE > MAX_WINDOW_HEIGHT)
+	if (map->height == 0 || map->height < 3)
 		return (0);
 	return (1);
 }
@@ -101,13 +100,16 @@ t_map *read_map(const char *filename)
 	if (!check_filename(filename))
 		free_error_handle(map, "Map file must have .ber extension\n");
 	if (!count_map_lines(map, filename))
-		free_error_handle(map, "Invalid or empty map\n");
+		free_error_handle(map, "Invalid map or empty\n");
 	if (!alloc_fill_map(map, filename))
 		free_error_handle(map, "Failed to load map\n");
 	map->width = (int)ft_strlen(map->grid[0]);
-	if (map->width == 0 || map->width < 3
-		|| map->width * TILE_SIZE > MAX_WINDOW_WIDTH)
-		free_error_handle(map, "Invalid or empty map\n");
+	if (map->width == 0 || map->width < 3)
+		free_error_handle(map, "Invalid map or empty\n");
+	if (map->width * TILE_SIZE > MAX_WINDOW_WIDTH
+		||map->height * TILE_SIZE > MAX_WINDOW_HEIGHT
+		||map->height * map->width > MAX_TILE_NUMBER)
+		free_error_handle(map, "Map too large\n");
 	validate_map(map);
 	check_path_valid(map);
 	return (map);
