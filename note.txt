@@ -20,3 +20,25 @@ make MLX_FLAGS="-LMLX42/build -lmlx42 -L/opt/homebrew/opt/glfw/lib -ldl -lglfw -
 
 
 1\empty, empty line, not rectangle, not wall, not PEC, too small, too big,
+
+
+typedef struct mlx_image
+{
+	const uint32_t	width;
+	const uint32_t	height;
+	uint8_t*		pixels;
+	mlx_instance_t*	instances;
+	size_t			count;
+	bool			enabled;
+	void*			context;
+}	mlx_image_t;
+
+
+typedef struct mlx_texture
+{
+	uint32_t	width;
+	uint32_t	height;
+	uint8_t		bytes_per_pixel;
+	uint8_t*	pixels;
+}	mlx_texture_t;
+

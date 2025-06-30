@@ -6,7 +6,7 @@
 /*   By: linliu <linliu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 10:49:45 by linliu            #+#    #+#             */
-/*   Updated: 2025/06/27 13:23:11 by linliu           ###   ########.fr       */
+/*   Updated: 2025/06/30 18:24:31 by linliu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 //# define WIDTH 800
 //# define HEIGHT 600 //common window size
-# define TILE_SIZE 32
-# define MAX_TILE_NUMBER 10000
+# define TILE_SIZE 64
+//# define MAX_TILE_NUMBER 10000
 # define MAX_WINDOW_WIDTH 1920
 # define MAX_WINDOW_HEIGHT 1080
 
@@ -36,6 +36,22 @@ typedef struct s_map
 	int		collectible;
 }	t_map;
 
+typedef struct s_texture
+{
+	mlx_image_t	*wall;
+	mlx_image_t	*floor;
+	mlx_image_t	*player;
+	mlx_image_t	*collectible;
+	mlx_image_t	*exit;
+}	t_texture;
+
+typedef struct s_game
+{
+	t_texture	tex;
+	mlx_t		*mlx;
+	t_map		*map;
+}	t_game;
+
 //parse map
 t_map	*read_map(const char *filename);
 void	remove_newline(char *line);
@@ -50,4 +66,12 @@ void	free_error_handle(t_map *map, char *str);
 //check path
 void	check_path_valid(t_map *map);
 
+//game utils
+void	terminate_with_error(t_game *game, char *str);
+
 #endif
+
+
+/*px stands for pixel — it’s the smallest unit of a digital image or screen. 64*64 Clear enough for tile-based games
+A tile is one block in your game map — for example, a wall, floor, collectible, or player position
+One tile = One image of fixed pixel size, Usually: 1 tile = 64 × 64 pixels*/

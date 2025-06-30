@@ -6,7 +6,7 @@
 /*   By: linliu <linliu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 12:45:11 by linliu            #+#    #+#             */
-/*   Updated: 2025/06/27 12:24:37 by linliu           ###   ########.fr       */
+/*   Updated: 2025/06/30 18:07:56 by linliu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,10 +106,10 @@ t_map *read_map(const char *filename)
 	map->width = (int)ft_strlen(map->grid[0]);
 	if (map->width == 0 || map->width < 3)
 		free_error_handle(map, "Invalid map or empty\n");
-	if (map->width * TILE_SIZE > MAX_WINDOW_WIDTH
-		||map->height * TILE_SIZE > MAX_WINDOW_HEIGHT
-		||map->height * map->width > MAX_TILE_NUMBER)
-		free_error_handle(map, "Map too large\n");
+	// if (map->width * TILE_SIZE > MAX_WINDOW_WIDTH
+	// 	||map->height * TILE_SIZE > MAX_WINDOW_HEIGHT
+	// 	||map->height * map->width > MAX_TILE_NUMBER) //where should i put??
+	// 	free_error_handle(map, "Map too large\n");
 	validate_map(map);
 	check_path_valid(map);
 	return (map);
