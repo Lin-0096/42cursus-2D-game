@@ -8,7 +8,9 @@ SRCS := src/main.c \
 		src/parse_map.c \
 		src/validate_map.c \
 		src/map_utils.c \
-		src/check_path.c
+		src/check_path.c \
+		src/game_utils.c \
+		src/render_game.c
 OBJS := $(SRCS:.c=.o)
 
 LIBFT_DIR := libft

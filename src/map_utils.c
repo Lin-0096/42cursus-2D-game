@@ -6,24 +6,25 @@
 /*   By: linliu <linliu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 13:33:03 by linliu            #+#    #+#             */
-/*   Updated: 2025/06/30 18:21:32 by linliu           ###   ########.fr       */
+/*   Updated: 2025/06/30 22:42:34 by linliu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	print_map(char **map) //for debug,delete!!
+void	print_map(t_map *map, t_game *game) //for debug,delete!!
 {
 	int	i;
 
 	i = 0;
-	while(map[i])
+	while(map->grid[i])
 	{
-		ft_putstr_fd(map[i], 1);
+		ft_putstr_fd(map->grid[i], 1);
 		write(1, "\n", 1);
 		i++;
 	}
-	//printf("height:%i, width:%i\n", map->height, map->width);
+	printf("Window size: width = %d, height = %d\n", game->map->width * TILE_SIZE, game->map->height * TILE_SIZE);
+	printf("height:%i, width:%i\n", map->height, map->width);
 }
 
 void	init_map(t_map *map)
