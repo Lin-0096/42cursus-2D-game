@@ -6,7 +6,7 @@
 /*   By: linliu <linliu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 10:46:49 by linliu            #+#    #+#             */
-/*   Updated: 2025/07/01 17:55:51 by linliu           ###   ########.fr       */
+/*   Updated: 2025/07/01 18:35:33 by linliu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,10 @@ int	main (int argc, char **argv)
 		return(EXIT_FAILURE);
 	}
 	game.map = read_map(argv[1]);
-	game.mlx = mlx_init(game.map->height * TILE_SIZE, game.map->width * TILE_SIZE, "MEOW", false);
+	game.mlx = mlx_init(game.map->width * TILE_SIZE, game.map->height * TILE_SIZE, "MEOW", false);
 	if (!game.mlx)
 		terminate_with_error(&game, "mlx initialized failed\n");
+	game.moves_count = 0;
 	init_texture(&game); //png->texture->image
 	render_game(&game); //image->windoow
 	print_map(game.map, &game);

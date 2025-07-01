@@ -6,7 +6,7 @@
 /*   By: linliu <linliu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 10:49:45 by linliu            #+#    #+#             */
-/*   Updated: 2025/07/01 17:57:37 by linliu           ###   ########.fr       */
+/*   Updated: 2025/07/01 18:33:40 by linliu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ typedef struct s_game
 	t_texture	tex;
 	mlx_t		*mlx;
 	t_map		*map;
+	int			moves_count;
 }	t_game;
 
 //parse map
