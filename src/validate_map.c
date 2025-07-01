@@ -6,27 +6,11 @@
 /*   By: linliu <linliu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 13:34:58 by linliu            #+#    #+#             */
-/*   Updated: 2025/07/01 10:35:02 by linliu           ###   ########.fr       */
+/*   Updated: 2025/07/01 17:51:59 by linliu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-static int	is_empty_line(t_map *map)
-{
-	int	i;
-
-	i = 0;
-	if (!map || !map->grid)
-		return (0);
-	while (i < map->height)
-	{
-		if (!map->grid[i] || map->grid[i][0] == '\0' )
-			return(0);
-		i++;
-	}
-	return (1);
-}
 
 static int	other_chara(t_map *map)
 {

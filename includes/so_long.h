@@ -6,7 +6,7 @@
 /*   By: linliu <linliu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 10:49:45 by linliu            #+#    #+#             */
-/*   Updated: 2025/07/01 16:45:18 by linliu           ###   ########.fr       */
+/*   Updated: 2025/07/01 17:57:37 by linliu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,19 +69,20 @@ void	init_map(t_map *map);
 void	free_whole_map(t_map *map);
 void	free_error_handle(t_map *map, char *str);
 void	remove_newline(char *line);
+int		is_empty_line(t_map *map);
 
 //check path
 void	check_path_valid(t_map *map);
 
 //game utils
 void	terminate_with_error(t_game *game, char *str);
-void	init_texture(t_game *game);
-mlx_image_t	*load_texture(t_game *game, char *png_path);
 void	close_game(t_game *game, char *str);
 void	cleanup_image(t_game *game);
+void		init_texture(t_game *game);
 
 //render
-void	render_game(t_game *game);
+void		render_game(t_game *game);
+//mlx_image_t	*load_texture(t_game *game, char *png_path);
 
 //start game
 void	handle_input(mlx_key_data_t keydata, void *param);

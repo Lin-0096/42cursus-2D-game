@@ -6,7 +6,7 @@
 /*   By: linliu <linliu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 13:33:03 by linliu            #+#    #+#             */
-/*   Updated: 2025/07/01 17:44:46 by linliu           ###   ########.fr       */
+/*   Updated: 2025/07/01 17:52:17 by linliu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,20 @@ void	remove_newline(char *line)
 	{
 		line[i - 1] = '\0';
 	}
+}
+
+int	is_empty_line(t_map *map)
+{
+	int	i;
+
+	i = 0;
+	if (!map || !map->grid)
+		return (0);
+	while (i < map->height)
+	{
+		if (!map->grid[i] || map->grid[i][0] == '\0' )
+			return(0);
+		i++;
+	}
+	return (1);
 }
