@@ -6,7 +6,7 @@
 /*   By: linliu <linliu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 13:34:58 by linliu            #+#    #+#             */
-/*   Updated: 2025/06/25 21:56:59 by linliu           ###   ########.fr       */
+/*   Updated: 2025/07/01 10:35:02 by linliu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,9 +97,6 @@ static int	has_required_elements(t_map *map)
 	if (!map || !map->grid)
 		return (0);
 	i = 0;
-	map->player = 0;
-	map->exit = 0;
-	map->collectible = 0;
 	while (map->grid[i])
 	{
 		j = 0;

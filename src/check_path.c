@@ -6,7 +6,7 @@
 /*   By: linliu <linliu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 14:15:35 by linliu            #+#    #+#             */
-/*   Updated: 2025/06/26 19:52:31 by linliu           ###   ########.fr       */
+/*   Updated: 2025/07/01 10:47:12 by linliu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,7 @@ static char	**copy_map(t_map *map)
 	copy[i] = NULL;
 	return (copy);
 }
-
-static void	get_player_pos(t_map *map, int *x, int *y)
+static void	get_player_pos(t_map *map)
 {
 	int	i;
 	int	j;
@@ -48,8 +47,8 @@ static void	get_player_pos(t_map *map, int *x, int *y)
 		{
 			if (map->grid[i][j] == 'P')
 			{
-				*x = j; // x is width, j
-				*y = i; //y is heigth, i
+				map->player_x = j; // x is width, j
+				map->player_y = i; //y is heigth, i
 				return;
 			}
 			j++;
@@ -98,7 +97,9 @@ void	check_path_valid(t_map *map)
 	copy_grid = copy_map(map);
 	if (!copy_grid)
 		free_error_handle(map, "Map copy failed\n");
-	get_player_pos(map, &x, &y);
+	get_player_pos(map);
+	x = map->player_x;
+	y = map->player_y;
 	flood_fill(map, copy_grid, x, y);
 	if (!check_collectibles_exits(copy_grid))
 	{

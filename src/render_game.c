@@ -6,7 +6,7 @@
 /*   By: linliu <linliu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 17:29:46 by linliu            #+#    #+#             */
-/*   Updated: 2025/06/30 22:42:10 by linliu           ###   ########.fr       */
+/*   Updated: 2025/07/01 10:04:35 by linliu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,40 +21,7 @@ mlx_delete_texture(tex)； i don't need it anymore
 mlx_image_to_window(mlx, img, x, y); Put the image into your game window
 */
 
-static mlx_image_t	*load_texture(t_game *game, char *png_path)
-{
-	mlx_texture_t *tmp;
-	mlx_image_t	*img;
-
-	tmp = mlx_load_png(png_path);
-	if (!tmp)
-		terminate_with_error(game, "fail to load png\n");
-	img = mlx_texture_to_image(game->mlx, tmp);
-	mlx_delete_texture(tmp);
-	if (!img)
-		return (NULL);
-	return (img);
-}
-
-void	init_texture(t_game *game)
-{
-	game->tex.wall = load_texture(game, WALL);
-	if (!game->tex.wall)
-		terminate_with_error(game, "fail to convert wall texture\n");
-	game->tex.floor = load_texture(game, FLOOR);
-	if (!game->tex.floor)
-		terminate_with_error(game, "fail to convert floor texture\n");
-	game->tex.player = load_texture(game, PLAYER);
-	if (!game->tex.player)
-		terminate_with_error(game, "fail to convert player texture\n");
-	game->tex.exit = load_texture(game, EXIT);
-	if (!game->tex.exit)
-		terminate_with_error(game, "fail to convert exit texture\n");
-	game->tex.collectible = load_texture(game, COLLECTIBLE);
-	if (!game->tex.collectible)
-		terminate_with_error(game, "fail to convert collectible texture\n");
-}
-void	render_map_background(t_game *game)
+static void	render_map_background(t_game *game)
 {
 	int	x;
 	int	y;
@@ -81,7 +48,7 @@ void	render_map_background(t_game *game)
 	}
 }
 
-void	render_map_player_exit(t_game *game)
+static void	render_map_player_exit(t_game *game)
 {
 	int	x;
 	int	y;
@@ -108,7 +75,7 @@ void	render_map_player_exit(t_game *game)
 	}
 }
 
-void	render_map_collectible(t_game *game)
+static void	render_map_collectible(t_game *game)
 {
 	int	x;
 	int	y;
@@ -130,7 +97,7 @@ void	render_map_collectible(t_game *game)
 	}
 }
 
-void	init_game(t_game *game, const char *map_path)
+void	render_game(t_game *game, const char *map_path)
 {
 	game->map = read_map(map_path);
 	game->mlx = mlx_init(game->map->height * TILE_SIZE, game->map->width * TILE_SIZE, "MEOW", false);

@@ -6,7 +6,7 @@
 /*   By: linliu <linliu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 13:33:03 by linliu            #+#    #+#             */
-/*   Updated: 2025/06/30 22:42:34 by linliu           ###   ########.fr       */
+/*   Updated: 2025/07/01 10:41:36 by linliu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ void	init_map(t_map *map)
 	map->player = 0;
 	map->exit = 0;
 	map->collectible = 0;
+	map->player_x = 0;
+	map->player_y = 0;
 }
 
 void	free_whole_map(t_map *map)

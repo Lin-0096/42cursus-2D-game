@@ -6,7 +6,7 @@
 /*   By: linliu <linliu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 10:46:49 by linliu            #+#    #+#             */
-/*   Updated: 2025/06/30 22:43:02 by linliu           ###   ########.fr       */
+/*   Updated: 2025/07/01 10:19:17 by linliu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	main (int argc, char **argv)
 		ft_putstr_fd("Error: give me one map\n", STDERR_FILENO);
 		return(EXIT_FAILURE);
 	}
-	init_game(&game, argv[1]);
+	render_game(&game, argv[1]);
 	print_map(game.map, &game);
 
 	// //key

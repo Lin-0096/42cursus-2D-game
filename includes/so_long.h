@@ -6,7 +6,7 @@
 /*   By: linliu <linliu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 10:49:45 by linliu            #+#    #+#             */
-/*   Updated: 2025/06/30 22:55:01 by linliu           ###   ########.fr       */
+/*   Updated: 2025/07/01 10:47:18 by linliu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ typedef struct s_map
 	int		player;
 	int		exit;
 	int		collectible;
+	int		player_x;
+	int		player_y;
 }	t_map;
 
 typedef struct s_texture
@@ -59,26 +61,25 @@ typedef struct s_game
 
 //parse map
 t_map	*read_map(const char *filename);
-void	remove_newline(char *line);
 void	validate_map(t_map *map);
 
-//common utils
+//map utils
 void	print_map(t_map *map, t_game *game); //debug,delete!!
 void	init_map(t_map *map);
 void	free_whole_map(t_map *map);
 void	free_error_handle(t_map *map, char *str);
+void	remove_newline(char *line);
 
 //check path
 void	check_path_valid(t_map *map);
 
 //game utils
 void	terminate_with_error(t_game *game, char *str);
+void	init_texture(t_game *game);
+mlx_image_t	*load_texture(t_game *game, char *png_path);
 
 //render
-void	render_map_background(t_game *game);
-void	render_map_player_exit(t_game *game);
-void	render_map_collectible(t_game *game);
-void	init_game(t_game *game, const char *map_path);
+void	render_game(t_game *game, const char *map_path);
 
 #endif
 

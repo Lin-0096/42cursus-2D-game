@@ -6,7 +6,7 @@
 /*   By: linliu <linliu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 12:45:11 by linliu            #+#    #+#             */
-/*   Updated: 2025/06/30 22:47:23 by linliu           ###   ########.fr       */
+/*   Updated: 2025/07/01 10:47:42 by linliu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static int	fill_map(t_map *map, int fd)
 	return (1);
 }
 
-static int alloc_fill_map(t_map *map, const char *filename)
+static int alloc_and_fill_map(t_map *map, const char *filename)
 {
 	int		fd;
 
@@ -101,8 +101,8 @@ t_map *read_map(const char *filename)
 		free_error_handle(map, "Map file must have .ber extension\n");
 	if (!count_map_lines(map, filename))
 		free_error_handle(map, "Invalid map or empty\n");
-	if (!alloc_fill_map(map, filename))
-		free_error_handle(map, "Failed to load map\n");
+	if (!alloc_and_fill_map(map, filename))
+		free_error_handle(map, "Load map failed\n");
 	map->width = (int)ft_strlen(map->grid[0]);
 	if (map->width == 0 || map->width < 3)
 		free_error_handle(map, "Invalid map or empty\n");
