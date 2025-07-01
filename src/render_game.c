@@ -6,7 +6,7 @@
 /*   By: linliu <linliu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 17:29:46 by linliu            #+#    #+#             */
-/*   Updated: 2025/07/01 10:04:35 by linliu           ###   ########.fr       */
+/*   Updated: 2025/07/01 17:48:25 by linliu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,39 @@ mlx_delete_texture(tex)； i don't need it anymore
 
 mlx_image_to_window(mlx, img, x, y); Put the image into your game window
 */
+mlx_image_t	*load_texture(t_game *game, char *png_path)
+{
+	mlx_texture_t *tmp;
+	mlx_image_t	*img;
+
+	tmp = mlx_load_png(png_path);
+	if (!tmp)
+		terminate_with_error(game, "fail to load png\n");
+	img = mlx_texture_to_image(game->mlx, tmp);
+	mlx_delete_texture(tmp);
+	if (!img)
+		return (NULL);
+	return (img);
+}
+
+void	init_texture(t_game *game)
+{
+	game->tex.wall = load_texture(game, WALL);
+	if (!game->tex.wall)
+		terminate_with_error(game, "fail to convert wall texture\n");
+	game->tex.floor = load_texture(game, FLOOR);
+	if (!game->tex.floor)
+		terminate_with_error(game, "fail to convert floor texture\n");
+	game->tex.player = load_texture(game, PLAYER);
+	if (!game->tex.player)
+		terminate_with_error(game, "fail to convert player texture\n");
+	game->tex.exit = load_texture(game, EXIT);
+	if (!game->tex.exit)
+		terminate_with_error(game, "fail to convert exit texture\n");
+	game->tex.collectible = load_texture(game, COLLECTIBLE);
+	if (!game->tex.collectible)
+		terminate_with_error(game, "fail to convert collectible texture\n");
+}
 
 static void	render_map_background(t_game *game)
 {
@@ -48,34 +81,7 @@ static void	render_map_background(t_game *game)
 	}
 }
 
-static void	render_map_player_exit(t_game *game)
-{
-	int	x;
-	int	y;
-
-	x = 0;
-	while (x < game->map->width)
-	{
-		y = 0;
-		while (y < game->map->height)
-		{
-			if (game->map->grid[y][x] == 'P')
-			{
-				if (mlx_image_to_window(game->mlx, game->tex.player, x * TILE_SIZE, y * TILE_SIZE) < 0)
-					terminate_with_error(game, "fail to put the player image to window");
-			}
-			else if (game->map->grid[y][x] == 'E')
-			{
-				if (mlx_image_to_window(game->mlx, game->tex.exit, x * TILE_SIZE, y * TILE_SIZE) < 0)
-					terminate_with_error(game, "fail to put the exit image to window");
-			}
-			y++;
-		}
-		x++;
-	}
-}
-
-static void	render_map_collectible(t_game *game)
+static void	render_map_collectible_exit(t_game *game)
 {
 	int	x;
 	int	y;
@@ -91,20 +97,21 @@ static void	render_map_collectible(t_game *game)
 				if (mlx_image_to_window(game->mlx, game->tex.collectible, x * TILE_SIZE, y * TILE_SIZE) < 0)
 					terminate_with_error(game, "fail to put the collectible image to window\n");
 			}
+			else if (game->map->grid[y][x] == 'E')
+			{
+				if (mlx_image_to_window(game->mlx, game->tex.exit, x * TILE_SIZE, y * TILE_SIZE) < 0)
+					terminate_with_error(game, "fail to put the exit image to window");
+			}
 			y++;
 		}
 		x++;
 	}
 }
 
-void	render_game(t_game *game, const char *map_path)
+void	render_game(t_game *game)
 {
-	game->map = read_map(map_path);
-	game->mlx = mlx_init(game->map->height * TILE_SIZE, game->map->width * TILE_SIZE, "MEOW", false);
-	if (!game->mlx)
-		terminate_with_error(game, "mlx initialized failed\n");
-	init_texture(game);
 	render_map_background(game);
-	render_map_collectible(game);
-	render_map_player_exit(game);
+	render_map_collectible_exit(game);
+	if (mlx_image_to_window(game->mlx, game->tex.player, game->map->player_x * TILE_SIZE, game->map->player_y * TILE_SIZE) < 0)
+		terminate_with_error(game, "fail to put the player image to window");
 }

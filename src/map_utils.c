@@ -6,7 +6,7 @@
 /*   By: linliu <linliu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 13:33:03 by linliu            #+#    #+#             */
-/*   Updated: 2025/07/01 10:41:36 by linliu           ###   ########.fr       */
+/*   Updated: 2025/07/01 17:44:46 by linliu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ void	free_whole_map(t_map *map)
 
 void	free_error_handle(t_map *map, char *str)
 {
-	free_whole_map(map);
+	if (map)
+		free_whole_map(map);
 	ft_putstr_fd("Error\n", STDERR_FILENO);
 	ft_putstr_fd(str, STDERR_FILENO);
 	exit(EXIT_FAILURE);
