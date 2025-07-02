@@ -6,7 +6,7 @@
 /*   By: linliu <linliu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 13:33:03 by linliu            #+#    #+#             */
-/*   Updated: 2025/07/01 17:52:17 by linliu           ###   ########.fr       */
+/*   Updated: 2025/07/02 10:37:37 by linliu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,11 @@ void	free_whole_map(t_map *map)
 {
 	if (!map)
 		return ;
-	ft_free_arr(map->grid);
+	if (map->grid)
+	{
+		ft_free_arr(map->grid);
+		map->grid = NULL;
+	}
 	free(map);
 }
 

@@ -6,7 +6,7 @@
 /*   By: linliu <linliu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 12:45:11 by linliu            #+#    #+#             */
-/*   Updated: 2025/07/01 14:41:01 by linliu           ###   ########.fr       */
+/*   Updated: 2025/07/02 10:34:07 by linliu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ t_map *read_map(const char *filename)
 		free_error_handle(map, "Invalid map or empty\n");
 	if (map->width * TILE_SIZE > MAX_WINDOW_WIDTH
 		||map->height * TILE_SIZE > MAX_WINDOW_HEIGHT
-		||map->height * map->width > MAX_TILE_NUMBER) //where should i put this block??
+		||map->height * map->width > MAX_TILE_NUMBER)
 		free_error_handle(map, "Map too large\n");
 	validate_map(map);
 	check_path_valid(map); //get player pos already

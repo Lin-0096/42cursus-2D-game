@@ -6,7 +6,7 @@
 /*   By: linliu <linliu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 10:52:36 by linliu            #+#    #+#             */
-/*   Updated: 2025/07/01 18:36:36 by linliu           ###   ########.fr       */
+/*   Updated: 2025/07/02 10:27:57 by linliu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	handle_input(mlx_key_data_t keydata, void *param)
 	t_game	*game;
 	int		next_x;
 	int		next_y;
-	int		gamewon;
+	int		win;
 
 	if (keydata.action != MLX_PRESS) //check press first
 		return ;
@@ -82,13 +82,13 @@ void	handle_input(mlx_key_data_t keydata, void *param)
 		close_game(game, "Closed by esc!\n");
 	}
 	get_next_position(keydata, game, &next_x, &next_y);
-	gamewon = check_and_update_player_position(game, next_x, next_y);
+	win = check_and_update_player_position(game, next_x, next_y);
 	game->moves_count++;
 	ft_putstr_fd("Moves: ", 1);
 	ft_putnbr_fd(game->moves_count, 1);
 	ft_putstr_fd("\n", 1);
 	render_game(game);
-	if (gamewon)
+	if (win)
 		close_game(game, "You win!\n");
 }
 
