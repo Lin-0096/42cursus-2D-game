@@ -6,7 +6,7 @@
 /*   By: linliu <linliu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 15:39:54 by linliu            #+#    #+#             */
-/*   Updated: 2025/07/02 20:19:01 by linliu           ###   ########.fr       */
+/*   Updated: 2025/07/02 23:55:15 by linliu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,20 @@
 
 static void	collect_items(t_game *game, int new_x, int new_y)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
 	game->map->grid[new_y][new_x] = '0';
-	while (i < game->map->collectible)
+	while (i < game->tex.collectible->count)
 	{
-		if (game->tex.collectible->instances[i].x == new_x * TILE_SIZE \
-			&& game->tex.collectible->instances[i].y == new_y * TILE_SIZE)
+		if (game->tex.collectible->instances[i].x == new_x * TILE_SIZE && game->tex.collectible->instances[i].y == new_y * TILE_SIZE)
 		{
 			game->tex.collectible->instances[i].enabled = false;
-			break;
+			break ;
 		}
 		i++;
 	}
-		game->map->collectible--;
+	game->map->collectible--;
 }
 
 static void	move_player(t_game *game, int new_x, int new_y)
@@ -40,8 +39,8 @@ static void	move_player(t_game *game, int new_x, int new_y)
 		return ;
 	game->map->player_x = new_x;
 	game->map->player_y = new_y;
-	game->tex.player->instances->x = new_x * TILE_SIZE;
-	game->tex.player->instances->y = new_y * TILE_SIZE;
+	game->tex.player->instances[0].x = new_x * TILE_SIZE;
+	game->tex.player->instances[0].y = new_y * TILE_SIZE;
 	game->moves_count++;
 	ft_putstr_fd("Moves: ", 1);
 	ft_putnbr_fd(game->moves_count, 1);
@@ -69,11 +68,11 @@ void	handle_input(mlx_key_data_t keydata, void *param)
 	x = game->map->player_x;
 	y = game->map->player_y;
 	if (keydata.key == MLX_KEY_W || keydata.key == MLX_KEY_UP)
-		move_player(game, x, y-1);
+		move_player(game, x, y - 1);
 	else if (keydata.key == MLX_KEY_S || keydata.key == MLX_KEY_DOWN)
-		move_player(game, x, y+1);
+		move_player(game, x, y + 1);
 	else if (keydata.key == MLX_KEY_A || keydata.key == MLX_KEY_LEFT)
-		move_player(game, x-1, y);
+		move_player(game, x - 1, y);
 	else if (keydata.key == MLX_KEY_D || keydata.key == MLX_KEY_RIGHT)
-		move_player(game, x+1, y);
+		move_player(game, x + 1, y);
 }
