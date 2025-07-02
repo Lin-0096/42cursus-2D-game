@@ -56,7 +56,8 @@ void	free_error_handle(t_map *map, char *str)
 	if (map)
 		free_whole_map(map);
 	ft_putstr_fd("Error\n", STDERR_FILENO);
-	ft_putstr_fd(str, STDERR_FILENO);
+	if (str && *str)
+		ft_putstr_fd(str, STDERR_FILENO);
 	exit(EXIT_FAILURE);
 }
 
