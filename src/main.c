@@ -6,7 +6,7 @@
 /*   By: linliu <linliu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 10:46:49 by linliu            #+#    #+#             */
-/*   Updated: 2025/07/02 10:38:57 by linliu           ###   ########.fr       */
+/*   Updated: 2025/07/02 16:55:19 by linliu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,11 @@ int	main (int argc, char **argv)
 	render_game(&game); //image->windoow
 	//print_map(game.map, &game);
 	mlx_key_hook(game.mlx, handle_input, &game); //play game
-
 	// //run
 	mlx_loop(game.mlx);
 	//stop
-	mlx_terminate(game.mlx); //should I delete image before terminate, or just use close_game func?
-
+	close_game(&game, "Closed by clicking on the cross!\n");
+	//mlx_terminate(game.mlx); //should I delete image before terminate, or just use close_game func?
 	free_whole_map(game.map);
 	return (0);
 }
