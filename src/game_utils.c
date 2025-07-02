@@ -84,7 +84,8 @@ void	close_game(t_game *game, char *str)
 		mlx_terminate(game->mlx);
 	if (game->map)
 		free_whole_map(game->map);
-	ft_putstr_fd(str, 1);
+	if (str && *str)
+		ft_putstr_fd(str, 1);
 	ft_putstr_fd("Thanks for playing game!\n", 1);
 	exit(EXIT_SUCCESS);
 }
