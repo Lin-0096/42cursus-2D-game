@@ -6,7 +6,7 @@
 /*   By: linliu <linliu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 10:52:36 by linliu            #+#    #+#             */
-/*   Updated: 2025/07/02 10:27:57 by linliu           ###   ########.fr       */
+/*   Updated: 2025/07/02 19:38:16 by linliu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,8 @@ static int	check_and_update_player_position(t_game *game, int next_x, int next_y
 			update_player_position(game, next_x, next_y);
 			return (1);
 		}
-		return (0);
+		//return (0);
+		update_player_position(game, next_x, next_y);
 	}
 	else
 		update_player_position(game, next_x, next_y);
@@ -73,7 +74,7 @@ void	handle_input(mlx_key_data_t keydata, void *param)
 	int		next_y;
 	int		win;
 
-	if (keydata.action != MLX_PRESS) //check press first
+	if (keydata.action == MLX_PRESS) //check press first
 		return ;
 	game = (t_game *)param; //pass value
 	if (keydata.key == MLX_KEY_ESCAPE) //handle esc

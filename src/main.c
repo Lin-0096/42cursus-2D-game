@@ -6,7 +6,7 @@
 /*   By: linliu <linliu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 10:46:49 by linliu            #+#    #+#             */
-/*   Updated: 2025/07/02 16:55:19 by linliu           ###   ########.fr       */
+/*   Updated: 2025/07/02 19:21:04 by linliu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	main (int argc, char **argv)
 	game.moves_count = 0;
 	init_texture(&game); //png->texture->image
 	render_game(&game); //image->windoow
-	//print_map(game.map, &game);
+	print_map(game.map, &game);
 	mlx_key_hook(game.mlx, handle_input, &game); //play game
 	// //run
 	mlx_loop(game.mlx);

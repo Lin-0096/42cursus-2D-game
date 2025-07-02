@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   play_game.c                                        :+:      :+:    :+:   */
+/*   new_play_game.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: linliu <linliu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 15:39:54 by linliu            #+#    #+#             */
-/*   Updated: 2025/07/02 16:44:50 by linliu           ###   ########.fr       */
+/*   Updated: 2025/07/02 20:19:01 by linliu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,21 @@
 
 static void	collect_items(t_game *game, int new_x, int new_y)
 {
-	
+	int	i;
+
+	i = 0;
+	game->map->grid[new_y][new_x] = '0';
+	while (i < game->map->collectible)
+	{
+		if (game->tex.collectible->instances[i].x == new_x * TILE_SIZE \
+			&& game->tex.collectible->instances[i].y == new_y * TILE_SIZE)
+		{
+			game->tex.collectible->instances[i].enabled = false;
+			break;
+		}
+		i++;
+	}
+		game->map->collectible--;
 }
 
 static void	move_player(t_game *game, int new_x, int new_y)
@@ -34,7 +48,8 @@ static void	move_player(t_game *game, int new_x, int new_y)
 	ft_putstr_fd("\n", 1);
 	if (pos == 'E' && game->map->collectible <= 0)
 		close_game(game, "You win!\n");
-	collect_items(game, new_x, new_y);
+	else if (pos == 'C')
+		collect_items(game, new_x, new_y);
 }
 
 void	handle_input(mlx_key_data_t keydata, void *param)
@@ -53,13 +68,12 @@ void	handle_input(mlx_key_data_t keydata, void *param)
 	}
 	x = game->map->player_x;
 	y = game->map->player_y;
-
 	if (keydata.key == MLX_KEY_W || keydata.key == MLX_KEY_UP)
-		move_player(game, x, y--);
+		move_player(game, x, y-1);
 	else if (keydata.key == MLX_KEY_S || keydata.key == MLX_KEY_DOWN)
-		move_player(game, x, y++);
+		move_player(game, x, y+1);
 	else if (keydata.key == MLX_KEY_A || keydata.key == MLX_KEY_LEFT)
-		move_player(game, x--, y);
+		move_player(game, x-1, y);
 	else if (keydata.key == MLX_KEY_D || keydata.key == MLX_KEY_RIGHT)
-		move_player(game, x++, y);
+		move_player(game, x+1, y);
 }

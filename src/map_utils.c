@@ -6,7 +6,7 @@
 /*   By: linliu <linliu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 13:33:03 by linliu            #+#    #+#             */
-/*   Updated: 2025/07/02 10:37:37 by linliu           ###   ########.fr       */
+/*   Updated: 2025/07/02 19:21:48 by linliu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	print_map(t_map *map, t_game *game) //for debug,delete!!
 	}
 	printf("Window size: width = %d, height = %d\n", game->map->width * TILE_SIZE, game->map->height * TILE_SIZE);
 	printf("height:%i, width:%i\n", map->height, map->width);
+	printf("p: %i, e: %i, c: %i\n", map->player, map->exit, map->collectible);
 }
 
 void	init_map(t_map *map)

@@ -6,7 +6,7 @@
 /*   By: linliu <linliu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 17:29:46 by linliu            #+#    #+#             */
-/*   Updated: 2025/07/01 18:01:43 by linliu           ###   ########.fr       */
+/*   Updated: 2025/07/02 19:18:58 by linliu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,15 @@ static void	render_map_background(t_game *game)
 		y = 0;
 		while (y < game->map->height)
 		{
-			if (game->map->grid[y][x] == '0')
-			{
-				if (mlx_image_to_window(game->mlx, game->tex.floor, x * TILE_SIZE, y * TILE_SIZE) < 0)
-					terminate_with_error(game, "fail to put the floor image to window");
-			}
-			else if (game->map->grid[y][x] == '1')
+			if (game->map->grid[y][x] == '1')
 			{
 				if (mlx_image_to_window(game->mlx, game->tex.wall, x * TILE_SIZE, y * TILE_SIZE) < 0)
 					terminate_with_error(game, "fail to put the wall image to window");
+			}
+			else
+			{
+				if (mlx_image_to_window(game->mlx, game->tex.floor, x * TILE_SIZE, y * TILE_SIZE) < 0)
+					terminate_with_error(game, "fail to put the floor image to window");
 			}
 			y++;
 		}
