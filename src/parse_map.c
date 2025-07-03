@@ -6,7 +6,7 @@
 /*   By: linliu <linliu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 12:45:11 by linliu            #+#    #+#             */
-/*   Updated: 2025/07/02 10:34:07 by linliu           ###   ########.fr       */
+/*   Updated: 2025/07/03 14:44:38 by linliu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ static int alloc_and_fill_map(t_map *map, const char *filename)
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 	{
-		free(map);
+		free_whole_map(map);
 		perror(filename);
 		exit(EXIT_FAILURE);
 	}
