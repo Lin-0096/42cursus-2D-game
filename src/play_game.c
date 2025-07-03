@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   new_play_game.c                                    :+:      :+:    :+:   */
+/*   play_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: linliu <linliu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 15:39:54 by linliu            #+#    #+#             */
-/*   Updated: 2025/07/02 23:55:15 by linliu           ###   ########.fr       */
+/*   Updated: 2025/07/03 15:51:30 by linliu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,10 @@ static void	move_player(t_game *game, int new_x, int new_y)
 	ft_putnbr_fd(game->moves_count, 1);
 	ft_putstr_fd("\n", 1);
 	if (pos == 'E' && game->map->collectible <= 0)
-		close_game(game, "You win!\n");
+	{
+		ft_putstr_fd("You win!\n", 1);
+		close_game(game);
+	}
 	else if (pos == 'C')
 		collect_items(game, new_x, new_y);
 }
@@ -63,7 +66,8 @@ void	handle_input(mlx_key_data_t keydata, void *param)
 	if (keydata.key == MLX_KEY_ESCAPE)
 	{
 		mlx_close_window(game->mlx);
-		close_game(game, "Closed by esc!\n");
+		ft_putstr_fd("Closed by esc!\n", 1);
+		close_game(game);
 	}
 	x = game->map->player_x;
 	y = game->map->player_y;

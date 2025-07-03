@@ -6,7 +6,7 @@
 /*   By: linliu <linliu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 18:05:57 by linliu            #+#    #+#             */
-/*   Updated: 2025/07/01 18:01:47 by linliu           ###   ########.fr       */
+/*   Updated: 2025/07/03 15:48:54 by linliu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,15 +77,16 @@ void	cleanup_image(t_game *game)
 		mlx_delete_image(game->mlx, game->tex.collectible);
 }
 
-void	close_game(t_game *game, char *str)
+void	close_game(void *param)
 {
+	t_game	*game;
+
+	game = (t_game *)param;
 	cleanup_image(game);
 	if (game->mlx)
 		mlx_terminate(game->mlx);
 	if (game->map)
 		free_whole_map(game->map);
-	if (str && *str)
-		ft_putstr_fd(str, 1);
-	ft_putstr_fd("Thanks for playing game!\n", 1);
+	ft_putstr_fd("Thanks for playing game!\n", STDOUT_FILENO);
 	exit(EXIT_SUCCESS);
 }

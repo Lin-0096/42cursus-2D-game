@@ -6,7 +6,7 @@
 /*   By: linliu <linliu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 10:49:45 by linliu            #+#    #+#             */
-/*   Updated: 2025/07/02 22:33:24 by linliu           ###   ########.fr       */
+/*   Updated: 2025/07/03 15:52:56 by linliu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,20 +77,17 @@ void	check_path_valid(t_map *map);
 
 //game utils
 void	terminate_with_error(t_game *game, char *str);
-void	close_game(t_game *game, char *str);
+void	close_game(void *param);
 void	cleanup_image(t_game *game);
 void		init_texture(t_game *game);
 
 //render
 void		render_game(t_game *game);
-//mlx_image_t	*load_texture(t_game *game, char *png_path);
 
 //start game
 void	handle_input(mlx_key_data_t keydata, void *param);
 
 #endif
-
-
 /*px stands for pixel — it’s the smallest unit of a digital image or screen. 64*64 Clear enough for tile-based games
 A tile is one block in your game map — for example, a wall, floor, collectible, or player position
 One tile = One image of fixed pixel size, Usually: 1 tile = 64 × 64 pixels*/
