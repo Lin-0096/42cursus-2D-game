@@ -1,11 +1,12 @@
-<div align="center">
-  <picture>
-    <img src="https://raw.githubusercontent.com/ayogun/42-project-badges/main/badges/solongm.png" alt="42 so_long badge">
-  </picture>
+<p align="center">
+  <img src="https://raw.githubusercontent.com/ayogun/42-project-badges/main/badges/so_longm.png" alt="42 so_long badge">
+</p>
 
-  <p><a href="https://www.hive.fi/en/curriculum">Hive (42 School Network)</a> core curriculum project</p>
-  <h1>so_long</h1>
-</div>
+<p align="center">
+  <a href="https://www.hive.fi/en/curriculum">Hive (42 School Network)</a> core curriculum project  
+</p>
+<h1 align="center">so_long</h1>
+
 
 **so_long** is a basic 2D game built in C using the modern **MLX42** graphics library.
 The player explores a tile-based map, collects all items, and reaches the exit.
