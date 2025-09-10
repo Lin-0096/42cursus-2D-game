@@ -96,9 +96,9 @@ make
 
 ## 🎓 Learning Highlights
 
-- 🧠 Learned to use a modern C graphics library (MLX42)
-- 🗺️ Parsed and validated custom level maps
-- 🎮 Built real-time event-driven logic using key hooks and frame loops
-- 💾 Managed manual memory, textures, and graceful shutdown
-- 🔁 Applied structured design: separation of game logic, rendering, and input
+- Learned to use a modern C graphics library (MLX42)
+- Parsed and validated custom level maps
+- Built real-time event-driven logic using key hooks and frame loops
+- Managed manual memory, textures, and graceful shutdown
+- Applied structured design: separation of game logic, rendering, and input
 
